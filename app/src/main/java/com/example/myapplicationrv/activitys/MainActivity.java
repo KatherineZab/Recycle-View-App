@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.rvcon);
-        searchBar = findViewById(R.id.search_bar); // שדה חיפוש
+        searchBar = findViewById(R.id.search_bar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         customeAdapter = new CustomeAdapter(arr);
         recyclerView.setAdapter(customeAdapter);
 
-        // מאזין לשינויי טקסט בחיפוש
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

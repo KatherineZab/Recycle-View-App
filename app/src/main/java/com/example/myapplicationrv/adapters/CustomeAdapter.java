@@ -1,5 +1,6 @@
 package com.example.myapplicationrv.adapters;
 
+import android.widget.Toast;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
     private ArrayList<Data> arr;
 
     public CustomeAdapter(ArrayList<Data> arr) {
-        this.arr = new ArrayList<>(arr); // יצירת עותק כדי למנוע בעיות בעדכון רשימה
+        this.arr = new ArrayList<>(arr);
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder {
@@ -44,21 +45,27 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CustomeAdapter.myViewHolder holder, int position) {
-        Data item = arr.get(position);
-        holder.username.setText(item.getName());
-        holder.nameVersion.setText(item.getVersion());
-        holder.imageViewItem.setImageResource(item.getImage());
+        Data currentItem = arr.get(position);
+
+        holder.username.setText(currentItem.getName());
+        holder.nameVersion.setText(currentItem.getVersion());
+        holder.imageViewItem.setImageResource(currentItem.getImage());
+
+        holder.itemView.setOnClickListener(v -> {
+            Toast.makeText(v.getContext(), "chosen: " + currentItem.getName(), Toast.LENGTH_SHORT).show();
+        });
     }
+
 
     @Override
     public int getItemCount() {
         return arr.size();
     }
 
-    // פונקציה לעדכון הרשימה בסינון
+
     public void updateList(ArrayList<Data> newList) {
         arr.clear();
         arr.addAll(newList);
-        notifyDataSetChanged(); // עדכון התצוגה
+        notifyDataSetChanged();
     }
 }
